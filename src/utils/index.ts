@@ -40,6 +40,7 @@ const grabAdjacentCells = (
     bottomRightBomb,
   };
 };
+
 export const generateCells = (): Cell[][] => {
   let cells: Cell[][] = [];
 
@@ -51,7 +52,7 @@ export const generateCells = (): Cell[][] => {
         // value:-1,0
         value: CellValue.none,
         state: CellState.open,
-        // state: CellState.visible,checkf for styling
+        // state: CellState.visible,check for styling
       });
     }
   }
@@ -88,20 +89,6 @@ export const generateCells = (): Cell[][] => {
         continue;
       }
       let bombs = 0;
-      // const topLeftBomb =
-      //   rIdx > 0 && cIdx > 0 ? cells[rIdx - 1][cIdx - 1] : null;
-      // const topBomb = rIdx > 0 ? cells[rIdx - 1][cIdx] : null;
-      // const topRightBomb =
-      //   rIdx > 0 && cIdx < MAX_COLS - 1 ? cells[rIdx - 1][cIdx + 1] : null;
-      // const leftBomb = cIdx > 0 ? cells[rIdx][cIdx - 1] : null;
-      // const rightBomb = cIdx < MAX_COLS - 1 ? cells[rIdx][cIdx + 1] : null;
-      // const bottomLeftBomb =
-      //   rIdx < MAX_ROWS - 1 && cIdx > 0 ? cells[rIdx + 1][cIdx - 1] : null;
-      // const bottomBomb = rIdx < MAX_ROWS - 1 ? cells[rIdx + 1][cIdx] : null;
-      // const bottomRightBomb =
-      //   rIdx < MAX_ROWS - 1 && cIdx < MAX_COLS - 1
-      //     ? cells[rIdx + 1][cIdx + 1]
-      //     : null;
       const {
         topLeftBomb,
         topBomb,
@@ -158,6 +145,7 @@ export const openCellsRecurse = (
   if (curr.state === CellState.visible || curr.state === CellState.flagged) {
     return cells;
   }
+
   let newCells = cells.slice();
   newCells[rowP][colP].state = CellState.visible;
   const {
@@ -245,5 +233,6 @@ export const openCellsRecurse = (
       newCells[rowP + 1][colP + 1].state = CellState.visible;
     }
   }
+
   return newCells;
 };

@@ -1,7 +1,8 @@
 ## Minesweeper
 
 Built using `React`, `TypeScript`, `SCSS` .
-[Play](https://www.youtube.com/)
+
+[Play](https://sharp-volhard-bd04b9.netlify.app/)
 
 ---
 

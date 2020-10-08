@@ -32,6 +32,7 @@ const App: React.FC = () => {
       window.removeEventListener("mouseup", handMouseUp);
     };
   }, []);
+
   useEffect(() => {
     if (live && time < 500) {
       const timer = setInterval(() => setTime(time + 1), 1000);
@@ -60,6 +61,7 @@ const App: React.FC = () => {
       // alert("Frickkity fuck, bombed!!");
     }
   }, [lost]);
+
   useEffect(() => {
     if (won) {
       setLive(false);
@@ -106,6 +108,7 @@ const App: React.FC = () => {
     } else {
       newCells[rowP][colP].state = CellState.visible;
     }
+
     // Check for win condition
     let openedCellsSafe = false;
     for (let r = 0; r < MAX_ROWS; ++r) {
@@ -133,6 +136,7 @@ const App: React.FC = () => {
     }
     setCells(newCells);
   };
+
   const cellContext = (rowP: number, colP: number) => (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ): void => {
