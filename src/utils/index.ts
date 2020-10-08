@@ -1,5 +1,3 @@
-import { cpuUsage } from "process";
-import React from "react";
 import { MAX_COLS, MAX_ROWS, NO_OF_BOMBS } from "../constants";
 import { Cell, CellValue, CellState } from "../types";
 
@@ -157,7 +155,7 @@ export const openCellsRecurse = (
   colP: number
 ): Cell[][] => {
   const curr = cells[rowP][colP];
-  if (curr.state == CellState.visible || curr.state == CellState.flagged) {
+  if (curr.state === CellState.visible || curr.state === CellState.flagged) {
     return cells;
   }
   let newCells = cells.slice();

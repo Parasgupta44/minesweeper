@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { CellState, CellValue } from "../../types";
 import "./Button.scss";
 
