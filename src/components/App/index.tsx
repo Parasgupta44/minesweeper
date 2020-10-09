@@ -56,9 +56,13 @@ const App: React.FC = () => {
     if (lost) {
       setLive(false);
       setFace(Face.lost);
-      setPlayMsg("Frickkity Fuck..lost!!");
+      setPlayMsg("Frickkity Fuck..lost,restarting!!");
       setInstructions("");
-      // alert("Frickkity fuck, bombed!!");
+      setTimeout(() => { 
+         setCells(generateCells());
+         setTime(0);setBombCount(12);
+         setFace(Face.smile); 
+      }, 6000);
     }
   }, [lost]);
 
