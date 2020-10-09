@@ -62,6 +62,8 @@ const App: React.FC = () => {
          setCells(generateCells());
          setTime(0);setBombCount(12);
          setFace(Face.smile); 
+         setPlayMsg("Play it already...");
+         setInstructions("Instructions");
       }, 6000);
     }
   }, [lost]);
