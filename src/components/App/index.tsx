@@ -27,7 +27,7 @@ const App: React.FC = () => {
   const [bombCount, setBombCount] = useState<number>(12);
   const [lost, setLost] = useState<boolean>(false);
   const [won, setWon] = useState<boolean>(false);
-  const [playMsg, setPlayMsg] = useState<string>("Play it already...");
+  // const [playMsg, setPlayMsg] = useState<string>(msg.messages);
   const [instructions, setInstructions] = useState<string>("Instructions");
 
   useEffect(() => {
@@ -53,7 +53,8 @@ const App: React.FC = () => {
       };
     } else if (time >= 500) {
       alert("Frickkity fuck, time over (500 sec) !!");
-      setPlayMsg("Fuck..Time over..Restart !!");
+      dispatch(changeMessage("Fuck..Time over..Restart !!"));
+      // setPlayMsg("Fuck..Time over..Restart !!");
       setInstructions("");
       setLive(false);
       setTime(0);
@@ -62,13 +63,14 @@ const App: React.FC = () => {
       setBombCount(12);
       setWon(false);
     }
-  }, [live, time]);
+  }, [live, time]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (lost) {
       setLive(false);
       setFace(Face.lost);
-      setPlayMsg("Frickkity Fuck..lost, restart!!");
+      dispatch(changeMessage("Frickkity Fuck..lost, restart!!"));
+      // setPlayMsg("Frickkity Fuck..lost, restart!!");
       setInstructions("");
       // setTimeout(() => {
       //    setCells(generateCells());
@@ -78,19 +80,19 @@ const App: React.FC = () => {
       //    setInstructions("Instructions");
       // }, 6000);
     }
-  }, [lost]);
+  }, [lost]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (won) {
       setLive(false);
       setFace(Face.won);
-      setPlayMsg("Frick Frick Frickitty Fuck, you won!!");
+      dispatch(changeMessage("Frick Frick Frickitty Fuck, you won!!"));
+      // setPlayMsg("Frick Frick Frickitty Fuck, you won!!");
       setInstructions("");
     }
-  }, [won]);
+  }, [won]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const cellClick = (rowP: number, colP: number) => (): void => {
-    // console.log(rowP, colP);
     let newCells = cells.slice();
     if (!live) {
       let shitItsBomb = newCells[rowP][colP].value === CellValue.bomb;
@@ -182,14 +184,14 @@ const App: React.FC = () => {
   };
 
   const faceClick = (): void => {
-    dispatch(changeMessage("Fuck yeah"));
     setLive(false);
     setTime(0);
     setCells(generateCells());
     setLost(false);
     setBombCount(12);
     setWon(false);
-    setPlayMsg("Play it already...");
+    dispatch(changeMessage("Play it already..."));
+    // setPlayMsg("Play it already...");
     setInstructions("Instructions");
   };
 
@@ -228,7 +230,7 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <h3 className="headings">
-        {playMsg}
+        {msg.messages}
         <a
           href="http://minesweeperonline.com/"
           target="_blank"
