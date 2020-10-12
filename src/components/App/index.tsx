@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import NumberDisplay from "../NumberDisplay";
 import "./App.scss";
@@ -6,8 +7,19 @@ import Button from "../Button";
 import { generateCells, openCellsRecurse } from "../../utils";
 import { Cell, CellState, CellValue, Face } from "../../types";
 import { MAX_COLS, MAX_ROWS } from "../../constants";
+import { AppState } from "../../redux/store/configureStore";
+import { changeMessage } from "../../redux/actions/messages";
 
 const App: React.FC = () => {
+  const msg: any = useSelector<AppState>((state: AppState) => {
+    return {
+      messages: state.messages.msg,
+    };
+  });
+
+  const dispatch = useDispatch();
+
+  // console.log(msg.messages);
   const [cells, setCells] = useState<Cell[][]>(generateCells());
   const [face, setFace] = useState<Face>(Face.smile);
   const [time, setTime] = useState<number>(0);
@@ -58,10 +70,10 @@ const App: React.FC = () => {
       setFace(Face.lost);
       setPlayMsg("Frickkity Fuck..lost, restart!!");
       setInstructions("");
-      // setTimeout(() => { 
+      // setTimeout(() => {
       //    setCells(generateCells());
       //    setTime(0);setBombCount(12);
-      //    setFace(Face.smile); 
+      //    setFace(Face.smile);
       //    setPlayMsg("Play it already...");
       //    setInstructions("Instructions");
       // }, 6000);
@@ -170,6 +182,7 @@ const App: React.FC = () => {
   };
 
   const faceClick = (): void => {
+    dispatch(changeMessage("Fuck yeah"));
     setLive(false);
     setTime(0);
     setCells(generateCells());
@@ -238,4 +251,5 @@ const App: React.FC = () => {
   );
 };
 
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
 export default App;
