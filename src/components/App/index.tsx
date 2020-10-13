@@ -1,6 +1,9 @@
+// library imports
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
+// user imports
 import NumberDisplay from "../NumberDisplay";
 import "./App.scss";
 import Button from "../Button";
@@ -9,11 +12,13 @@ import { Cell, CellState, CellValue, Face } from "../../types";
 import { MAX_COLS, MAX_ROWS } from "../../constants";
 import { AppState } from "../../redux/store/configureStore";
 import { changeMessage } from "../../redux/actions/messages";
+import { changeInstruction } from "../../redux/actions/instructions";
 
 const App: React.FC = () => {
   const msg: any = useSelector<AppState>((state: AppState) => {
     return {
       messages: state.messages.msg,
+      ins: state.instructions.ins,
     };
   });
 
@@ -28,7 +33,7 @@ const App: React.FC = () => {
   const [lost, setLost] = useState<boolean>(false);
   const [won, setWon] = useState<boolean>(false);
   // const [playMsg, setPlayMsg] = useState<string>(msg.messages);
-  const [instructions, setInstructions] = useState<string>("Instructions");
+  // const [instructions, setInstructions] = useState<string>(msg.ins);
 
   useEffect(() => {
     const handMouseDown = (): void => {
@@ -55,7 +60,8 @@ const App: React.FC = () => {
       alert("Frickkity fuck, time over (500 sec) !!");
       dispatch(changeMessage("Fuck..Time over..Restart !!"));
       // setPlayMsg("Fuck..Time over..Restart !!");
-      setInstructions("");
+      dispatch(changeInstruction(""));
+      // setInstructions("");
       setLive(false);
       setTime(0);
       setCells(generateCells());
@@ -71,7 +77,8 @@ const App: React.FC = () => {
       setFace(Face.lost);
       dispatch(changeMessage("Frickkity Fuck..lost, restart!!"));
       // setPlayMsg("Frickkity Fuck..lost, restart!!");
-      setInstructions("");
+      dispatch(changeInstruction(""));
+      // setInstructions("");
       // setTimeout(() => {
       //    setCells(generateCells());
       //    setTime(0);setBombCount(12);
@@ -88,7 +95,8 @@ const App: React.FC = () => {
       setFace(Face.won);
       dispatch(changeMessage("Frick Frick Frickitty Fuck, you won!!"));
       // setPlayMsg("Frick Frick Frickitty Fuck, you won!!");
-      setInstructions("");
+      dispatch(changeInstruction(""));
+      // setInstructions("");
     }
   }, [won]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -192,7 +200,8 @@ const App: React.FC = () => {
     setWon(false);
     dispatch(changeMessage("Play it already..."));
     // setPlayMsg("Play it already...");
-    setInstructions("Instructions");
+    dispatch(changeInstruction("Instructions"));
+    // setInstructions("Instructions");
   };
 
   const renderCells = (): React.ReactNode => {
@@ -231,13 +240,7 @@ const App: React.FC = () => {
     <div className="App">
       <h3 className="headings">
         {msg.messages}
-        <a
-          href="http://minesweeperonline.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {instructions}
-        </a>
+        <Link to="/instructions">{msg.ins}</Link>
       </h3>
       <div className="Header">
         <NumberDisplay value={bombCount} />
@@ -253,5 +256,4 @@ const App: React.FC = () => {
   );
 };
 
-// export default connect(mapStateToProps, mapDispatchToProps)(App);
 export default App;
