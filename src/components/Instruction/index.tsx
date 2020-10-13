@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import "./Instruction.scss";
 
@@ -17,7 +18,7 @@ const Instruction: React.FC<Props> = () => {
         <li className="centerIt">
           If bomb found, just restart by pressing{" "}
           <span role="img" aria-label="face">
-            🤐
+            &nbsp;🤐
           </span>
         </li>
         <li className="centerIt">The face emoji is for start / reset.</li>
@@ -31,7 +32,7 @@ const Instruction: React.FC<Props> = () => {
           </a>
         </li>
         <li className="centerIt">
-          <a href="/">Back to the game..</a>
+          <Link to="/">Back to the game..</Link>
         </li>
       </ul>
     </div>
