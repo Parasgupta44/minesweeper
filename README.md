@@ -4,7 +4,7 @@ Built using `React`, `Redux`, `TypeScript`, `SCSS` .
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/009845ab-b90c-4e15-9f10-26bdd3ae7475/deploy-status)](https://app.netlify.com/sites/sharp-volhard-bd04b9/deploys)
 
-[Play](https://sharp-volhard-bd04b9.netlify.app/)
+[Play](https://minesweeper-ts-react.netlify.app/)
 
 ---
 
